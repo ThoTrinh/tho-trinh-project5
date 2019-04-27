@@ -2,6 +2,8 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -73,6 +75,8 @@ public class HDFrame extends JFrame
         JLabel compare = new JLabel("Compare With: ");
         String[] stationIDS = new MesoEqual("FAIR").getStationIDS();
         JComboBox<String> compareID = new JComboBox<String>(stationIDS);
+        compareID.setSelectedItem(stationIDS[0]);
+        
         JButton calc = new JButton("Calculate HD");
         panel3.add(compare);
         panel3.add(compareID);
@@ -90,6 +94,20 @@ public class HDFrame extends JFrame
         JLabel distance4 = new JLabel("Distance 4");
         JTextField dis4TF = new JTextField();
         JButton add = new JButton("Add Station");
+        /*add.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                try {
+                    //TODO: write new word to text file
+                } catch () { 
+                    //file not found exception
+                }
+                
+            }
+            
+        });*/
         JTextField stationAdd = new JTextField();
         
         panel4.add(distance0);
