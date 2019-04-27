@@ -18,7 +18,10 @@ public class HDFrame extends JFrame
 {
     
     public HDFrame() {
-        this.setLayout(new GridLayout(4,2));
+        this.setLayout(new GridLayout(1,2));
+        
+        JPanel panel0 = new JPanel();
+        
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
         
@@ -102,10 +105,18 @@ public class HDFrame extends JFrame
         panel4.add(add);
         panel4.add(stationAdd);
         
-    this.add(panel1);
-    this.add(panel2);
-    this.add(panel3);
-    this.add(panel4);
+    
+        panel0.setLayout(new GridLayout(4,1));
+        panel0.setPreferredSize(new Dimension(300, 1000));
+        JPanel freePanel = new JPanel();
+        freePanel.setPreferredSize(new Dimension(300, 1000));
+        
+        panel0.add(panel1);
+        panel0.add(panel2);
+        panel0.add(panel3);
+        panel0.add(panel4);
+        this.add(panel0);
+        this.add(freePanel);
     setSize(new Dimension(600, 1000));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
