@@ -50,14 +50,22 @@ public class MesoEqual {
             
         }
     
+    /**
+     * @return the stationIDS
+     */
+    public String[] getStationIDS()
+    {
+        return stationIDS.toArray(new String[stationIDS.size()]);
+    }
+
     /*
      * Prints out an array List like this:
      * {NRMN=79, OKMU=79, STIL=79, JAYX=79, NEWP=79, STUA=79, WATO=79, MRSH=79}
      * that have the same ascii Average as the ascii average of the stationID
      */
-    public HashMap<String, Integer> calAsciiEqual() {
+    public ArrayList<String> calAsciiEqual() {
         
-        HashMap<String, Integer> equalAsciis = new HashMap<String, Integer>();
+        ArrayList<String> equalAsciis = new ArrayList<String>();
         MesoAscii Asciiavg = new MesoAscii(stationID);
         int AsciiAvg = Asciiavg.calAverage();
         
@@ -66,7 +74,7 @@ public class MesoEqual {
             int AsciiAvgNum = AsciiAvgTest.calAverage();
             
             if(AsciiAvgNum == AsciiAvg) {
-                equalAsciis.put(stationID, AsciiAvg);
+                equalAsciis.add(stationID);
             }
         }
         return equalAsciis;
