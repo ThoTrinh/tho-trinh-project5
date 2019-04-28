@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -103,6 +104,7 @@ public class HDFrame extends JFrame
         JLabel distance4 = new JLabel("Distance 4");
         JTextField dis4TF = new JTextField();
         JButton add = new JButton("Add Station");
+        add.setText("ZERO");
         
         JTextField stationAdd = new JTextField();
         calc.addActionListener(new ActionListener() {
@@ -177,7 +179,10 @@ public class HDFrame extends JFrame
         panel0.add(panel3);
         panel0.add(panel4);
         this.add(panel0);
+        
+        freePanel.add(new JLabel(new ImageIcon("giphy.gif")));
         this.add(freePanel);
+        
     setSize(new Dimension(600, 1000));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
