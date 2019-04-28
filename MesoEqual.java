@@ -57,7 +57,42 @@ public class MesoEqual {
     {
         return stationIDS.toArray(new String[stationIDS.size()]);
     }
-
+    
+    /**
+     * 
+     * @param HammingDist - Hamming Distance number we want to find
+     * @param fromStation
+     * @return
+     */
+    public ArrayList<String> calcStations(int HammingDist, String fromStation){
+        ArrayList<String> stations = new ArrayList<String>();
+        
+        for(String stationID: stationIDS) {
+            if(HammingDist == compareID(fromStation, stationID)) {
+                stations.add(stationID);
+            }
+        }
+        
+        return stations;
+    }
+    
+    public int compareID(String fromStationID, String toStationID) { //compares two station ID's
+        int wrongCharCount = 0; //keeps track of Hamming Distance
+        
+        if (fromStationID.length()==4 && toStationID.length() == 4) { //checks to see if argument passed is valid
+            char[] firstID = fromStationID.toCharArray(); // Splits the two ID's into character arrays
+            char[] secondID = toStationID.toCharArray();
+            
+            for(int i = 0; i < 4; i++) { //compares the array
+                if(firstID[i]!=secondID[i]) {
+                    wrongCharCount++; //increments if one is not the same
+                }
+            }
+        }
+        
+        return wrongCharCount;
+    }
+    
     /*
      * Prints out an array List like this:
      * {NRMN=79, OKMU=79, STIL=79, JAYX=79, NEWP=79, STUA=79, WATO=79, MRSH=79}

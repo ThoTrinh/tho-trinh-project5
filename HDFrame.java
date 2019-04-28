@@ -102,7 +102,7 @@ public class HDFrame extends JFrame
                 try {
                     //TODO: write new word to text file
                 } catch () { 
-                    //file not found exception
+                    //TODO: file not found exception
                 }
                 
             }
@@ -124,6 +124,16 @@ public class HDFrame extends JFrame
         panel4.add(stationAdd);
         
     
+        show.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+               stations.setListData(//array of those with specified hamming distance);
+            }
+            
+        });
+        
         panel0.setLayout(new GridLayout(4,1));
         panel0.setPreferredSize(new Dimension(300, 1000));
         JPanel freePanel = new JPanel();
