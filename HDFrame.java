@@ -4,7 +4,14 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,6 +45,7 @@ public class HDFrame extends JFrame
         gridbag.setConstraints(EHD, c);
         panel1.add(EHD);
         JTextField HD = new JTextField();
+        HD.setText(String.valueOf(1));
         c.gridwidth = GridBagConstraints.REMAINDER; //end row
         gridbag.setConstraints(HD, c);
         panel1.add(HD);
@@ -70,7 +78,6 @@ public class HDFrame extends JFrame
         
         JList stations = new JList(new MesoEqual("FAIR").calAsciiEqual().toArray());
         JScrollPane menuScroll = new JScrollPane(stations);
-        stations.setSize(getPreferredSize());
         panel2.add(menuScroll);
         
         JPanel panel3 = new JPanel(new GridLayout(2,2));
@@ -96,21 +103,45 @@ public class HDFrame extends JFrame
         JLabel distance4 = new JLabel("Distance 4");
         JTextField dis4TF = new JTextField();
         JButton add = new JButton("Add Station");
-        /*add.addActionListener(new ActionListener() {
+        
+        JTextField stationAdd = new JTextField();
+        calc.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                try {
-                    //TODO: write new word to text file
-                } catch () { 
-                    //TODO: file not found exception
-                }
-                
+                dis0TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(0, String.valueOf(compareID.getSelectedItem())).size()));
+                dis1TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(1, String.valueOf(compareID.getSelectedItem())).size()));
+                dis2TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(2, String.valueOf(compareID.getSelectedItem())).size()));
+                dis3TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(3, String.valueOf(compareID.getSelectedItem())).size()));
+                dis4TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(4, String.valueOf(compareID.getSelectedItem())).size()));
             }
             
-        });*/
-        JTextField stationAdd = new JTextField();
+        });
+        
+        add.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                ArrayList<String> old =  new ArrayList(Arrays.asList(new MesoEqual("FAIR").getStationIDS()));
+                old.add(stationAdd.getText());
+                
+                try (PrintWriter output = new PrintWriter("Mesonet.txt")){          
+                    for(String station: old) {
+                        if(station.equals(old.get(old.size() - 1))) {
+                            output.write(station);
+                        }else {
+                        output.write(station + "\n");
+                        }
+                    }
+                    compareID.setModel(new DefaultComboBoxModel(new MesoEqual("FAIR").getStationIDS()));
+                } catch (IOException excp) {
+                    excp.printStackTrace();
+                } 
+            }
+            
+        });
         
         panel4.add(distance0);
         panel4.add(dis0TF);

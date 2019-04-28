@@ -36,15 +36,8 @@ public class MesoEqual {
     { 
             Scanner input = new Scanner(new File(filename));
             
-            String strg;
-            //First two lines are not needed in program
-            strg = input.nextLine();
-            
             while (input.hasNextLine()) {
-                String[] words = strg.split(" "); //Splits the Line into individual data
-                stationIDS.add(words[0]); // Only adds the Station ID which is first entry of data
-                
-                strg = input.nextLine();
+                stationIDS.add(input.nextLine()); // Only adds the Station ID which is first entry of data
             }
             input.close();
             
