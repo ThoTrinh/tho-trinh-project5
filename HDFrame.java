@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
@@ -68,8 +69,9 @@ public class HDFrame extends JFrame
         JPanel panel2 = new JPanel(new GridLayout(2,0));
         
         JList stations = new JList(new MesoEqual("FAIR").calAsciiEqual().toArray());
+        JScrollPane menuScroll = new JScrollPane(stations);
         stations.setSize(getPreferredSize());
-        panel2.add(stations);
+        panel2.add(menuScroll);
         
         JPanel panel3 = new JPanel(new GridLayout(2,2));
         JLabel compare = new JLabel("Compare With: ");
@@ -129,7 +131,7 @@ public class HDFrame extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-               stations.setListData(//array of those with specified hamming distance);
+               stations.setListData(new MesoEqual("FAIR").calcStations(Integer.parseInt(HD.getText()), String.valueOf(compareID.getSelectedItem())).toArray());
             }
             
         });
