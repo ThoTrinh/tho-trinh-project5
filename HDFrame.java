@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -104,9 +106,12 @@ public class HDFrame extends JFrame
         JLabel distance4 = new JLabel("Distance 4");
         JTextField dis4TF = new JTextField();
         JButton add = new JButton("Add Station");
-        add.setText("ZERO");
+        
+        JLabel gif = new JLabel(new ImageIcon("giphy.gif")); //picture for freepanel
+        gif.setVisible(false);
         
         JTextField stationAdd = new JTextField();
+        stationAdd.setText("ZERO");
         calc.addActionListener(new ActionListener() {
 
             @Override
@@ -117,6 +122,16 @@ public class HDFrame extends JFrame
                 dis2TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(2, String.valueOf(compareID.getSelectedItem())).size()));
                 dis3TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(3, String.valueOf(compareID.getSelectedItem())).size()));
                 dis4TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(4, String.valueOf(compareID.getSelectedItem())).size()));
+                
+                gif.setVisible(true);
+                Timer timer = new Timer(1500, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent ae) {
+                        gif.setVisible(false);
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();
             }
             
         });
@@ -165,6 +180,17 @@ public class HDFrame extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                stations.setListData(new MesoEqual("FAIR").calcStations(Integer.parseInt(HD.getText()), String.valueOf(compareID.getSelectedItem())).toArray());
+               
+
+               gif.setVisible(true);
+               Timer timer = new Timer(1500, new ActionListener() {
+                   @Override
+                   public void actionPerformed(ActionEvent ae) {
+                       gif.setVisible(false);
+                   }
+               });
+               timer.setRepeats(false);
+               timer.start();
             }
             
         });
@@ -173,6 +199,7 @@ public class HDFrame extends JFrame
         panel0.setPreferredSize(new Dimension(300, 1000));
         JPanel freePanel = new JPanel();
         freePanel.setPreferredSize(new Dimension(300, 1000));
+        freePanel.setLayout(new BorderLayout());
         
         panel0.add(panel1);
         panel0.add(panel2);
@@ -180,7 +207,8 @@ public class HDFrame extends JFrame
         panel0.add(panel4);
         this.add(panel0);
         
-        freePanel.add(new JLabel(new ImageIcon("giphy.gif")));
+        freePanel.add(new JLabel("Use Program for GIFS"), BorderLayout.NORTH);
+        freePanel.add(gif, BorderLayout.CENTER);
         this.add(freePanel);
         
     setSize(new Dimension(600, 1000));
