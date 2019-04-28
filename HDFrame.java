@@ -135,7 +135,7 @@ public class HDFrame extends JFrame
                         output.write(station + "\n");
                         }
                     }
-                    compareID.setModel(new DefaultComboBoxModel(new MesoEqual("FAIR").getStationIDS()));
+                    compareID.addItem(stationAdd.getText());
                 } catch (IOException excp) {
                     excp.printStackTrace();
                 } 
