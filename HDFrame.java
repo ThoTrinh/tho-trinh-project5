@@ -49,11 +49,16 @@ public class HDFrame extends JFrame
         
         panel1Setup(HD, EHD, show, hdSlider);
         
+        /**
+         * Jcomponenets used in pnael2
+         */
         JList stations = new JList(new MesoEqual("FAIR").calAsciiEqual().toArray());
         JScrollPane menuScroll = new JScrollPane(stations);
         panel2Setup(menuScroll);
         
-        
+        /**
+         * JComponents used in panel3
+         */
         JLabel compare = new JLabel("Compare With: ");
         String[] stationIDS = new MesoEqual("FAIR").getStationIDS();
         JComboBox<String> compareID = new JComboBox<String>(stationIDS);
@@ -62,7 +67,9 @@ public class HDFrame extends JFrame
         JButton calc = new JButton("Calculate HD");
         panel3setup(compare, compareID, calc);
         
-       
+       /**
+        * JComponents used in Panel4
+        */
         JLabel distance0 = new JLabel("Distance 0");
         JTextField dis0TF = new JTextField();
         JLabel distance1 = new JLabel("Distance 1");
@@ -75,16 +82,17 @@ public class HDFrame extends JFrame
         JTextField dis4TF = new JTextField();
         JButton add = new JButton("Add Station");
         
-        JLabel gif = new JLabel(new ImageIcon("giphy.gif")); //success picture for freepanel
-        JLabel snap = new JLabel(new ImageIcon("snap.gif")); // snap picture for freepanel
-        
         JTextField stationAdd = new JTextField();
-        
-        freePanelSetup(gif, snap);
         
         panel4Setup(distance0, dis0TF, distance1, dis1TF, distance2, dis2TF, distance3, dis3TF, distance4, dis4TF, add,
                 stationAdd);
         
+        /**
+         * JComponents used in freePanel
+         */
+        JLabel gif = new JLabel(new ImageIcon("giphy.gif")); //success picture for freepanel
+        JLabel snap = new JLabel(new ImageIcon("snap.gif")); // snap picture for freepanel
+        freePanelSetup(gif, snap);
         
         calc.addActionListener(new ActionListener() {
 
@@ -157,33 +165,51 @@ public class HDFrame extends JFrame
             
         });
         
+        panel0Setup();
+        
+        this.add(panel0);
+        this.add(freePanel);
+        
+        setSize(new Dimension(800, 1000));
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    /**
+     * Panel 0 setup
+     * This is the left panel for the HDFrame()
+     */
+    private void panel0Setup()
+    {
         panel0.setLayout(new GridLayout(4,1));
         panel0.setPreferredSize(new Dimension(300, 1000));
-        
-        freePanel.setPreferredSize(new Dimension(500, 1000));
-        freePanel.setLayout(new BorderLayout());
         
         panel0.add(panel1);
         panel0.add(panel2);
         panel0.add(panel3);
         panel0.add(panel4);
-        this.add(panel0);
+    }
+
+    /**
+     * FreePanel setup
+     * This is the right panel for the HDFrame()
+     * 
+     * @param gif - gif of loki screaming success, it will play when you press the show button
+     * @param snap - gif of thanos snapping his fingers, it will play when you press the calculate HD button
+     */
+    private void freePanelSetup(JLabel gif, JLabel snap)
+    {
+        freePanel.setPreferredSize(new Dimension(500, 1000));
+        freePanel.setLayout(new BorderLayout());
+        
+        gif.setVisible(false);
+        
+        snap.setVisible(false);
         
         freePanel.add(new JLabel("Use Program for GIFS"), BorderLayout.NORTH);
         freePanel.add(gif, BorderLayout.CENTER);
         freePanel.add(snap, BorderLayout.SOUTH);
-        this.add(freePanel);
         
-    setSize(new Dimension(800, 1000));
-    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    setVisible(true);
-    }
-
-    private void freePanelSetup(JLabel gif, JLabel snap)
-    {
-        gif.setVisible(false);
-        
-        snap.setVisible(false);
     }
 
     private void panel3setup(JLabel compare, JComboBox<String> compareID, JButton calc)
