@@ -107,8 +107,10 @@ public class HDFrame extends JFrame
         JTextField dis4TF = new JTextField();
         JButton add = new JButton("Add Station");
         
-        JLabel gif = new JLabel(new ImageIcon("giphy.gif")); //picture for freepanel
+        JLabel gif = new JLabel(new ImageIcon("giphy.gif")); //success picture for freepanel
         gif.setVisible(false);
+        JLabel snap = new JLabel(new ImageIcon("snap.gif")); // snap picture for freepanel
+        snap.setVisible(false);
         
         JTextField stationAdd = new JTextField();
         stationAdd.setText("ZERO");
@@ -117,17 +119,19 @@ public class HDFrame extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                dis0TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(0, String.valueOf(compareID.getSelectedItem())).size()));
-                dis1TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(1, String.valueOf(compareID.getSelectedItem())).size()));
-                dis2TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(2, String.valueOf(compareID.getSelectedItem())).size()));
-                dis3TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(3, String.valueOf(compareID.getSelectedItem())).size()));
-                dis4TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(4, String.valueOf(compareID.getSelectedItem())).size()));
-                
-                gif.setVisible(true);
+             
+                snap.setVisible(true);
                 Timer timer = new Timer(1500, new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent ae) {
-                        gif.setVisible(false);
+                        snap.setVisible(false);
+                        
+                        dis0TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(0, String.valueOf(compareID.getSelectedItem())).size()));
+                        dis1TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(1, String.valueOf(compareID.getSelectedItem())).size()));
+                        dis2TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(2, String.valueOf(compareID.getSelectedItem())).size()));
+                        dis3TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(3, String.valueOf(compareID.getSelectedItem())).size()));
+                        dis4TF.setText(String.valueOf(new MesoEqual("FAIR").calcStations(4, String.valueOf(compareID.getSelectedItem())).size()));
+                        
                     }
                 });
                 timer.setRepeats(false);
@@ -198,7 +202,7 @@ public class HDFrame extends JFrame
         panel0.setLayout(new GridLayout(4,1));
         panel0.setPreferredSize(new Dimension(300, 1000));
         JPanel freePanel = new JPanel();
-        freePanel.setPreferredSize(new Dimension(300, 1000));
+        freePanel.setPreferredSize(new Dimension(500, 1000));
         freePanel.setLayout(new BorderLayout());
         
         panel0.add(panel1);
@@ -209,9 +213,10 @@ public class HDFrame extends JFrame
         
         freePanel.add(new JLabel("Use Program for GIFS"), BorderLayout.NORTH);
         freePanel.add(gif, BorderLayout.CENTER);
+        freePanel.add(snap, BorderLayout.SOUTH);
         this.add(freePanel);
         
-    setSize(new Dimension(600, 1000));
+    setSize(new Dimension(800, 1000));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
     }
