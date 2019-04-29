@@ -29,11 +29,15 @@ import javax.swing.event.ChangeListener;
 
 public class HDFrame extends JFrame
 {
+    private JPanel panel0 = new JPanel();
+    private JPanel panel1 = new JPanel();
+    private JPanel panel2 = new JPanel(new GridLayout(2,0));
+    private JPanel panel3 = new JPanel(new GridLayout(2,2));
+    private  JPanel panel4 = new JPanel(new GridLayout(6, 2));
+    private JPanel freePanel = new JPanel();
     
     public HDFrame() {
         this.setLayout(new GridLayout(1,2));
-        
-        JPanel panel0 = new JPanel();
         
         GridBagLayout gridbag = new GridBagLayout();
         GridBagConstraints c = new GridBagConstraints();
@@ -77,13 +81,11 @@ public class HDFrame extends JFrame
         gridbag.setConstraints(show, c);
         panel1.add(show);
         
-        JPanel panel2 = new JPanel(new GridLayout(2,0));
-        
         JList stations = new JList(new MesoEqual("FAIR").calAsciiEqual().toArray());
         JScrollPane menuScroll = new JScrollPane(stations);
         panel2.add(menuScroll);
         
-        JPanel panel3 = new JPanel(new GridLayout(2,2));
+        
         JLabel compare = new JLabel("Compare With: ");
         String[] stationIDS = new MesoEqual("FAIR").getStationIDS();
         JComboBox<String> compareID = new JComboBox<String>(stationIDS);
@@ -94,7 +96,7 @@ public class HDFrame extends JFrame
         panel3.add(compareID);
         panel3.add(calc);
         
-        JPanel panel4 = new JPanel(new GridLayout(6, 2));
+       
         JLabel distance0 = new JLabel("Distance 0");
         JTextField dis0TF = new JTextField();
         JLabel distance1 = new JLabel("Distance 1");
@@ -201,7 +203,7 @@ public class HDFrame extends JFrame
         
         panel0.setLayout(new GridLayout(4,1));
         panel0.setPreferredSize(new Dimension(300, 1000));
-        JPanel freePanel = new JPanel();
+        
         freePanel.setPreferredSize(new Dimension(500, 1000));
         freePanel.setLayout(new BorderLayout());
         
