@@ -39,51 +39,19 @@ public class HDFrame extends JFrame
     public HDFrame() {
         this.setLayout(new GridLayout(1,2));
         
-        GridBagLayout gridbag = new GridBagLayout();
-        GridBagConstraints c = new GridBagConstraints();
-        
-        JPanel panel1 = new JPanel();
-        panel1.setLayout(gridbag);
-        
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1.0;
-        JLabel EHD = new JLabel("Enter Hamming Distance: ");
-        
-        gridbag.setConstraints(EHD, c);
-        panel1.add(EHD);
+        /**
+         * JComponents used in panel1
+         */
         JTextField HD = new JTextField();
-        HD.setText(String.valueOf(1));
-        c.gridwidth = GridBagConstraints.REMAINDER; //end row
-        gridbag.setConstraints(HD, c);
-        panel1.add(HD);
-        
-        c.weightx = 0.0;                //reset to the default
-        JSlider hdSlider = new JSlider(1,4,1);
-        hdSlider.setMajorTickSpacing(1);
-        hdSlider.setPaintTicks(true);
-        hdSlider.setPaintLabels(true);
-        hdSlider.setLabelTable(hdSlider.createStandardLabels(1));
-        hdSlider.addChangeListener(new ChangeListener() {
-
-            @Override
-            public void stateChanged(ChangeEvent e)
-            {
-                HD.setText(String.valueOf(hdSlider.getValue()));
-            }
-            
-        });
-        gridbag.setConstraints(hdSlider, c);
-        panel1.add(hdSlider);
-        
-        c.gridwidth = GridBagConstraints.RELATIVE;
-        
+        JLabel EHD = new JLabel("Enter Hamming Distance: ");
         JButton show = new JButton("Show Button");
-        gridbag.setConstraints(show, c);
-        panel1.add(show);
+        JSlider hdSlider = new JSlider(1,4,1);
+        
+        panel1Setup(HD, EHD, show, hdSlider);
         
         JList stations = new JList(new MesoEqual("FAIR").calAsciiEqual().toArray());
         JScrollPane menuScroll = new JScrollPane(stations);
-        panel2.add(menuScroll);
+        panel2Setup(menuScroll);
         
         
         JLabel compare = new JLabel("Compare With: ");
@@ -92,9 +60,7 @@ public class HDFrame extends JFrame
         compareID.setSelectedItem(stationIDS[0]);
         
         JButton calc = new JButton("Calculate HD");
-        panel3.add(compare);
-        panel3.add(compareID);
-        panel3.add(calc);
+        panel3setup(compare, compareID, calc);
         
        
         JLabel distance0 = new JLabel("Distance 0");
@@ -110,12 +76,16 @@ public class HDFrame extends JFrame
         JButton add = new JButton("Add Station");
         
         JLabel gif = new JLabel(new ImageIcon("giphy.gif")); //success picture for freepanel
-        gif.setVisible(false);
         JLabel snap = new JLabel(new ImageIcon("snap.gif")); // snap picture for freepanel
-        snap.setVisible(false);
         
         JTextField stationAdd = new JTextField();
-        stationAdd.setText("ZERO");
+        
+        freePanelSetup(gif, snap);
+        
+        panel4Setup(distance0, dis0TF, distance1, dis1TF, distance2, dis2TF, distance3, dis3TF, distance4, dis4TF, add,
+                stationAdd);
+        
+        
         calc.addActionListener(new ActionListener() {
 
             @Override
@@ -165,20 +135,6 @@ public class HDFrame extends JFrame
             }
             
         });
-        
-        panel4.add(distance0);
-        panel4.add(dis0TF);
-        panel4.add(distance1);
-        panel4.add(dis1TF);
-        panel4.add(distance2);
-        panel4.add(dis2TF);
-        panel4.add(distance3);
-        panel4.add(dis3TF);
-        panel4.add(distance4);
-        panel4.add(dis4TF);
-        panel4.add(add);
-        panel4.add(stationAdd);
-        
     
         show.addActionListener(new ActionListener() {
 
@@ -221,6 +177,86 @@ public class HDFrame extends JFrame
     setSize(new Dimension(800, 1000));
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
+    }
+
+    private void freePanelSetup(JLabel gif, JLabel snap)
+    {
+        gif.setVisible(false);
+        
+        snap.setVisible(false);
+    }
+
+    private void panel3setup(JLabel compare, JComboBox<String> compareID, JButton calc)
+    {
+        panel3.add(compare);
+        panel3.add(compareID);
+        panel3.add(calc);
+    }
+
+    private void panel2Setup(JScrollPane menuScroll)
+    {
+        panel2.add(menuScroll);
+    }
+
+    private void panel4Setup(JLabel distance0, JTextField dis0TF, JLabel distance1, JTextField dis1TF, JLabel distance2,
+            JTextField dis2TF, JLabel distance3, JTextField dis3TF, JLabel distance4, JTextField dis4TF, JButton add,
+            JTextField stationAdd)
+    {
+        stationAdd.setText("ZERO");
+        
+        panel4.add(distance0);
+        panel4.add(dis0TF);
+        panel4.add(distance1);
+        panel4.add(dis1TF);
+        panel4.add(distance2);
+        panel4.add(dis2TF);
+        panel4.add(distance3);
+        panel4.add(dis3TF);
+        panel4.add(distance4);
+        panel4.add(dis4TF);
+        panel4.add(add);
+        panel4.add(stationAdd);
+    }
+
+    private void panel1Setup(JTextField HD, JLabel EHD, JButton show, JSlider hdSlider)
+    {
+        GridBagLayout gridbag = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        
+        panel1.setLayout(gridbag);
+        
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1.0;
+        
+        gridbag.setConstraints(EHD, c);
+        panel1.add(EHD);
+        
+        HD.setText(String.valueOf(1));
+        c.gridwidth = GridBagConstraints.REMAINDER; //end row
+        gridbag.setConstraints(HD, c);
+        panel1.add(HD);
+        
+        c.weightx = 0.0;                //reset to the default
+        hdSlider.setMajorTickSpacing(1);
+        hdSlider.setPaintTicks(true);
+        hdSlider.setPaintLabels(true);
+        hdSlider.setLabelTable(hdSlider.createStandardLabels(1));
+        hdSlider.addChangeListener(new ChangeListener() {
+
+            @Override
+            public void stateChanged(ChangeEvent e)
+            {
+                HD.setText(String.valueOf(hdSlider.getValue()));
+            }
+            
+        });
+        gridbag.setConstraints(hdSlider, c);
+        panel1.add(hdSlider);
+        
+        c.gridwidth = GridBagConstraints.RELATIVE;
+        
+        gridbag.setConstraints(show, c);
+        panel1.add(show);
     }
     
     public static void main(String[] args)
