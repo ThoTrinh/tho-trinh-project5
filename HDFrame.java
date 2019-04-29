@@ -212,6 +212,13 @@ public class HDFrame extends JFrame
         
     }
 
+    /**
+     * Sets up panel 3
+     * 
+     * @param compare - A JLabel next to the dropdown box saying "Compare With"
+     * @param compareID - A dropdown box containing all stations in Mesonet.txt
+     * @param calc - A button that displays all the different hamming distances station count
+     */
     private void panel3setup(JLabel compare, JComboBox<String> compareID, JButton calc)
     {
         panel3.add(compare);
@@ -219,11 +226,32 @@ public class HDFrame extends JFrame
         panel3.add(calc);
     }
 
+    /**
+     * Sets up panel 2
+     * 
+     * @param menuScroll - Contains a JList of all stations with a certain Hamming Distance
+     */
     private void panel2Setup(JScrollPane menuScroll)
     {
         panel2.add(menuScroll);
     }
 
+    /**
+     * Sets up panel 4
+     * 
+     * @param distance0 - Labeling Hamming Distance 0 
+     * @param dis0TF - Text Field Showing stations with Hamming Distance 0 
+     * @param distance1 - Labeling Hamming Distance 1
+     * @param dis1TF - Text Field Showing stations with Hamming Distance 1
+     * @param distance2 - Labeling Hamming Distance 2
+     * @param dis2TF - Text Field Showing stations with Hamming Distance 2
+     * @param distance3 - Labeling Hamming Distance 3
+     * @param dis3TF - Text Field Showing stations with Hamming Distance 3
+     * @param distance4 - Labeling Hamming Distance 4
+     * @param dis4TF - Text Field Showing stations with Hamming Distance 4
+     * @param add - button that allows you to add a new station
+     * @param stationAdd - text field for you to choose what station ID to add
+     */
     private void panel4Setup(JLabel distance0, JTextField dis0TF, JLabel distance1, JTextField dis1TF, JLabel distance2,
             JTextField dis2TF, JLabel distance3, JTextField dis3TF, JLabel distance4, JTextField dis4TF, JButton add,
             JTextField stationAdd)
@@ -243,7 +271,14 @@ public class HDFrame extends JFrame
         panel4.add(add);
         panel4.add(stationAdd);
     }
-
+/**
+ * Sets up panel1
+ * 
+ * @param HD - TextField showing Hamming Distance Desired
+ * @param EHD - Label saying "Enter Hamming Distance"
+ * @param show - Button showing stations in JList with specified Hamming Distances
+ * @param hdSlider - Slider allowing user to select Hamming Distance
+ */
     private void panel1Setup(JTextField HD, JLabel EHD, JButton show, JSlider hdSlider)
     {
         GridBagLayout gridbag = new GridBagLayout();
@@ -287,7 +322,6 @@ public class HDFrame extends JFrame
     
     public static void main(String[] args)
     {
-        // TODO Auto-generated method stub
         new HDFrame();
         
     }

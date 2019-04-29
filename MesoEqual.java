@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-/*
+/**
  * @author Tho Trinh
  * @version 03-22-2019
  * 
@@ -15,6 +15,10 @@ public class MesoEqual {
     private String stationID;
     private ArrayList<String> stationIDS = new ArrayList<String>(); //Array used to hold all station ID's in file
     
+    /**
+     * 
+     * @param stationID - name of station ID
+     */
     public MesoEqual(String stationID) {
         this.stationID = stationID;
         
@@ -30,7 +34,11 @@ public class MesoEqual {
         }
     }
     
-    //Write method to read File and store into array
+    /**
+     * Write method to read File and store into array
+     * @param filename - name of file
+     * @throws IOException - possible exception
+     */
    
     public void readFile(String filename) throws IOException //reads Mesonet.txt
     { 
@@ -69,6 +77,12 @@ public class MesoEqual {
         return stations;
     }
     
+    /**
+     * 
+     * @param fromStationID - station to compare with
+     * @param toStationID - station to compare with
+     * @return
+     */
     public int compareID(String fromStationID, String toStationID) { //compares two station ID's
         int wrongCharCount = 0; //keeps track of Hamming Distance
         
@@ -86,7 +100,7 @@ public class MesoEqual {
         return wrongCharCount;
     }
     
-    /*
+    /**
      * Prints out an array List like this:
      * {NRMN=79, OKMU=79, STIL=79, JAYX=79, NEWP=79, STUA=79, WATO=79, MRSH=79}
      * that have the same ascii Average as the ascii average of the stationID
