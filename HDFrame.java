@@ -52,7 +52,7 @@ public class HDFrame extends JFrame
         /**
          * Jcomponenets used in pnael2
          */
-        JList stations = new JList(new MesoEqual("FAIR").calAsciiEqual().toArray());
+        JList stations = new JList();
         JScrollPane menuScroll = new JScrollPane(stations);
         panel2Setup(menuScroll);
         
