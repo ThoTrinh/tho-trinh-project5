@@ -70,3 +70,4 @@ Logic must have calculate hamming distance of each station, and load stations wi
 
 Have a HDPanel() that implements mouselistener and draw
 
+https://raw.githubusercontent.com/ThoTrinh/tho-trinh-project5/master/Screen%20Shot%202019-04-29%20at%201.27.56%20PM.png?token=AKLZM4266GTAOMSAEXLPMSK4ZCDPE 
