@@ -100,25 +100,4 @@ public class MesoEqual {
         return wrongCharCount;
     }
     
-    /**
-     * Prints out an array List like this:
-     * {NRMN=79, OKMU=79, STIL=79, JAYX=79, NEWP=79, STUA=79, WATO=79, MRSH=79}
-     * that have the same ascii Average as the ascii average of the stationID
-     */
-    public ArrayList<String> calAsciiEqual() {
-        
-        ArrayList<String> equalAsciis = new ArrayList<String>();
-        MesoAscii Asciiavg = new MesoAscii(stationID);
-        int AsciiAvg = Asciiavg.calAverage();
-        
-        for(String stationID: stationIDS) {
-            MesoAscii AsciiAvgTest = new MesoAscii(stationID);
-            int AsciiAvgNum = AsciiAvgTest.calAverage();
-            
-            if(AsciiAvgNum == AsciiAvg) {
-                equalAsciis.add(stationID);
-            }
-        }
-        return equalAsciis;
-    }
 }
